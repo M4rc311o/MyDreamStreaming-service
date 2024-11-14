@@ -1,0 +1,10 @@
+services:
+  mdss:
+    build: .
+    container_name: mdss
+    ports:
+      - "127.0.0.1:1935:1935"
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./site:/etc/nginx/mdss/site
