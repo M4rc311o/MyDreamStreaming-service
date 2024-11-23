@@ -5,5 +5,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/nginx/mdss/site
+RUN mkdir -p /var/hls/tmp_hls 
+RUN mkdir -p /var/hls/recordings
+RUN mkdir -p /var/hls/screenshots
 
 EXPOSE 80
