@@ -9,4 +9,7 @@ RUN mkdir -p /var/hls/tmp_hls
 RUN mkdir -p /var/hls/recordings
 RUN mkdir -p /var/hls/screenshots
 
+
+
+
 EXPOSE 80

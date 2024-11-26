@@ -1,0 +1,6 @@
+exec /bin/bash -c '/usr/bin/ffmpeg -i rtmp://127.0.0.1:1935/live/test \
+    -map 0:v? -vf "fps=1/10,scale=400:-1" -q:v 2 /var/hls/screenshots/test_%04d.jpg \
+    -map 0:v? -vf "scale=640:360" -b:v 400k -preset fast -f hls -hls_time 2 -hls_playlist_type event /var/hls/tmp_hls/test_360.m3u8 \
+    -map 0:v? -vf "scale=854:480" -b:v 800k -preset fast -f hls -hls_time 2 -hls_playlist_type event /var/hls/tmp_hls/test_480.m3u8 \
+    -map 0:v? -vf "scale=1280:720" -b:v 2048k -preset fast -f hls -hls_time 2 -hls_playlist_type event /var/hls/tmp_hls/test_720.m3u8 \
+	-map 0:v? -c:v copy -f mp4 /var/hls/recordings/test.mp4;'
