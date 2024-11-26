@@ -13,3 +13,8 @@ services:
   flask:
     build: ./flask
     container_name: flask-mdss
+    volumes:
+      -avatars:/mdss/app/static/avatar
+
+volumes:
+  avatars:
