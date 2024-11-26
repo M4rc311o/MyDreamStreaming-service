@@ -1,5 +1,5 @@
 services:
-  mdss:
+  nginx:
     build: ./nginx
     container_name: nginx-mdss
     ports:
@@ -13,5 +13,7 @@ services:
       - ./data/hls:/var/hls/tmp_hls    #hls playlists   
       - ./data/recordings:/var/hls/recordings  #hls recordings
       - ./data/screenshots:/var/hls/screenshots #hls screenshots
-      
- 
+
+  flask:
+    build: ./flask
+    container_name: flask-mdss

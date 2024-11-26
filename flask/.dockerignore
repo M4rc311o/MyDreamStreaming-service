@@ -1,4 +1,6 @@
 .venv
 .vscode
+.git
 __pycache__
 instance
+purify.min.js

@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+<h2>Logged in as: <span class="text-primary">{{ current_user.username }}</span></h2>
+<form id="stream-name-form">
+    {{ stream_info_form.hidden_tag() }}
+    <div class="mb-3">
+        {{ stream_info_form.name.label(class_="form-label", for="stream-name") }}
+        <div class="d-flex">
+            {{ stream_info_form.name(class_="form-control me-2", id="stream-name") }}
+            <button type="submit" value="Save" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</form>
+<form>
+    {{ stream_key_form.hidden_tag() }}
+    <div class="mb-3">
+        {{ stream_key_form.key.label(class_="form-label", for="stream-key") }}
+        <div class="d-flex">
+            <div class="input-group me-2">
+                <button type="button" id="show-button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
+                {{ stream_key_form.key(class_="form-control", id="stream-key", disabled="") }}
+            </div>
+            <button type="button" id="reset-button" class="btn btn-danger me-2">Reset</button>
+            <button type="button" id="copy-button" class="btn btn-primary">Copy</button>
+        </div>
+    </div>
+</form>
+<script>
+    const csrf_token = "{{ csrf_token() }}";
+
+    document.getElementById("stream-name-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const rawStreamName = document.getElementById("stream-name").value;
+
+        if (!rawStreamName) {
+            showAlert("Stream name cannot be empty!", "danger");
+            return;
+        }
+
+        const sanitizedStreamName = DOMPurify.sanitize(rawStreamName);
+
+        fetch("/api/stream", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrf_token,
+            },
+            body: JSON.stringify({
+                name: rawStreamName,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if(data.status == 'success') {
+                    showAlert("Stream name updated", "info");
+                } else {
+                    showAlert("Error updating stream name", "danger");
+                }
+            });
+    });
+
+    document.getElementById("reset-button").addEventListener("click", () => {
+        fetch("/api/stream/key", {
+            method: "DELETE",
+            headers: {
+                "X-CSRFToken": csrf_token,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if(data.status == 'success') {
+                    document.getElementById("stream-key").value = data.data.key;
+                    showAlert("Stream key regenerated", "info");
+                    console.log("Stream key regenerated");
+                } else {
+                    showAlert("Error regenerating stream key", "danger");
+                }
+            });
+    });
+
+    document.getElementById("copy-button").addEventListener("click", () => {
+        const key = document.getElementById("stream-key").value;
+        navigator.clipboard.writeText(key);
+    });
+
+    document.getElementById("show-button").addEventListener("click", () => {
+        const keyEl = document.getElementById("stream-key");
+        keyEl.setAttribute("type", keyEl.getAttribute("type") === "password" ? "text" : "password");
+
+        document.getElementById("show-button").innerHTML = keyEl.getAttribute("type") === "password" ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+    });
+</script>
+{% endblock %}
