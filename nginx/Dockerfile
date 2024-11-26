@@ -9,7 +9,7 @@ RUN mkdir -p /var/hls/tmp_hls
 RUN mkdir -p /var/hls/recordings
 RUN mkdir -p /var/hls/screenshots
 
-
-
+COPY ./ffmpeg.sh /etc/nginx/ffmpeg.sh
+RUN chmod +x /etc/nginx/ffmpeg.sh
 
 EXPOSE 80

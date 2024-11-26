@@ -9,10 +9,6 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/stat.xsl:/etc/nginx/mdss/stat.xsl:ro
       - ./nginx/site:/etc/nginx/mdss/site
-      - ./nginx/ffmpeg.sh:/etc/nginx/ffmpeg.sh  #ffmpeg 
-      - ./data/hls:/var/hls/tmp_hls    #hls playlists   
-      - ./data/recordings:/var/hls/recordings  #hls recordings
-      - ./data/screenshots:/var/hls/screenshots #hls screenshots
 
   flask:
     build: ./flask
