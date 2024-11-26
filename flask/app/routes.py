@@ -119,10 +119,10 @@ def streams():
                 },
             })
     
-@main_bp.route('/api/streams/<int:stream_id>/name.txt')
+@main_bp.route('/api/streams/<int:stream_id>/name')
 def stream(stream_id):
     user = User.query.filter_by(id=stream_id).first()
     if user:
-        return user.stream_name
+        return render_template('stream_name.html', stream_name=user.stream_name)
     else:
         return "Stream name not found", 404
