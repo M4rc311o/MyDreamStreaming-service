@@ -3,14 +3,60 @@
 <div class="row">
     {% for i in range(9) %}
     <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
-        <div class="card">
-            <img src="https://picsum.photos/400/225" class="card-img-top">
+        <div class="card" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+            <img src="https://picsum.photos/400/225" class="card-img-top" alt="Stream">
             <div class="card-body">
-                <h5 class="card-title">Stream name</h5>
-                <p class="card-text">Streamer name</p>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Stream name</h5>
+                        <p class="card-text">Streamer name</p>
+                    </div>
+                    <img src="https://picsum.photos/50/50" class="rounded-circle" width="50px" height="50px" alt="Avatar">
+                </div>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Stream name</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <video
+                    id="my-video"
+                    class="video-js vjs-fluid"
+                    controls
+                    preload="auto"
+                    width="640"
+                    height="264"
+                    poster="https://picsum.photos/1920/1080"
+                    data-setup="{}"
+                >
+                    <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                    <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<style>
+    .card:hover {
+        transform: scale(1.05);
+        transition: transform 0.5s ease;
+        cursor: pointer;
+    }
+</style>
 {% endblock %}
