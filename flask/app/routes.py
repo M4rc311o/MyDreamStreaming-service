@@ -119,10 +119,10 @@ def streams():
                 },
             })
     
-@main_bp.route('/api/streams/<int:stream_id>/name')
+@main_bp.route('/api/streams/<int:stream_id>/overlay')
 def stream(stream_id):
     user = User.query.filter_by(id=stream_id).first()
     if user:
-        return render_template('stream_name.html', stream_name=user.stream_name)
+        return render_template('stream_overlay.html', user=user)
     else:
         return "Stream name not found", 404
