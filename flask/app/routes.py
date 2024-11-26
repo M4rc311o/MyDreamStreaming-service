@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
+from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify, current_app
 from flask_login import login_user, logout_user, login_required, current_user
-from app.forms import LoginForm, StreamInfoForm, StreamKeyForm
+from app.forms import LoginForm, StreamInfoForm, StreamKeyForm, AvatarForm
 from app.models import User
 from app import csrf
 from app import db
@@ -9,6 +9,7 @@ import app.keygen as keygen
 import bleach
 import xml.etree.ElementTree as ET
 import requests
+import os
 
 main_bp = Blueprint("main_bp", __name__)
 
@@ -47,8 +48,26 @@ def profile():
     stream_info_form.name.data = current_user.stream_name
     stream_key_form = StreamKeyForm()
     stream_key_form.key.data = current_user.stream_key
+    avatar_form = AvatarForm()
 
-    return render_template('profile.html', stream_info_form=stream_info_form, stream_key_form=stream_key_form)
+    return render_template('profile.html', stream_info_form=stream_info_form, stream_key_form=stream_key_form, avatar_form=avatar_form)
+
+@main_bp.route('/upload', methods=['POST'])
+@login_required
+def upload():
+    form = AvatarForm()
+    if form.validate_on_submit():
+        f = form.avatar.data
+        f.save(os.path.join(current_app.static_folder, 'avatar', str(current_user.id)))
+        return jsonify({
+            'status': 'success',
+            'data': None,
+        })
+
+    return jsonify({
+            'status': 'error',
+            'data': None,
+        })
 
 @main_bp.route('/api/stream', methods=['GET', 'PUT'])
 @login_required

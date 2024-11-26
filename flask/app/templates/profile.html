@@ -10,6 +10,19 @@
         </div>
     </div>
 </form>
+<form method="POST" action="/upload" id="avatar-form" enctype="multipart/form-data">
+    {{ avatar_form.hidden_tag() }}
+    <div class="mb-3">
+        {{ avatar_form.avatar.label(class_="form-label") }}
+        <div class="d-flex">
+            {{ avatar_form.avatar(class_="form-control me-2", id="avatar") }}
+            <button type="submit" value="Save" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+    {% for error in avatar_form.avatar.errors %}
+        <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+</form>
 <form>
     {{ stream_key_form.hidden_tag() }}
     <div class="mb-3">
@@ -26,6 +39,36 @@
 </form>
 <script>
     const csrf_token = "{{ csrf_token() }}";
+
+    document.getElementById("avatar-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const avatar = document.getElementById("avatar").files[0];
+
+        if (!avatar) {
+            showAlert("Avatar cannot be empty!", "danger");
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append('avatar', avatar);
+
+        fetch("/upload", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": csrf_token,
+            },
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if(data.status == 'success') {
+                    showAlert("Avatar updated", "info");
+                } else {
+                    showAlert("Error updating avatar", "danger");
+                }
+            });
+
+    });
 
     document.getElementById("stream-name-form").addEventListener("submit", (event) => {
         event.preventDefault();

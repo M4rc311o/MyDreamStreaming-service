@@ -12,11 +12,15 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN mkdir -p /app/app/static/js && \
-    chmod -R 755 /app/app/static
+RUN mkdir -p /mdss/app/static/js && \
+    chmod -R 755 /mdss/app/static
+
+RUN mkdir /mdss/app/static/avatar && \
+    chmod 755 /mdss/app/static/avatar
+
 RUN curl -L -o /mdss/app/static/js/purify.min.js https://unpkg.com/dompurify@latest/dist/purify.min.js
 
 EXPOSE 80
 
 #ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:80", "wsgi:app"]
-ENTRYPOINT ["python", "wsgi.py"]
+ENTRYPOINT ["python", "-u", "wsgi.py"]
