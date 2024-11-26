@@ -1,1 +1,38 @@
-{{ user.stream_name }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: transparent;
+        }
+        .text-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 15pt;
+            background-color: rgba(0, 0, 0, 0.7); /* Optional: Semi-transparent background */
+            color: white;
+            padding: 5px 0; /* Optional: Add some padding around the text */
+        }
+        .text-container img {
+            height: 30px; /* Adjust the image size as needed */
+            margin-right: 10px; /* Space between the image and text */
+        }
+    </style>
+</head>
+<body>
+    <div class="text-container">
+        <img src="https://hips.hearstapps.com/hmg-prod/images/best-small-dog-breeds-pomeranian-1598990901.jpg?crop=0.444xw:1.00xh;0.272xw,0&resize=980:*" alt="Logo"> <!-- Replace with your image path -->
+        {{ user.stream_name }}
+    </div>
+</body>
+</html>
