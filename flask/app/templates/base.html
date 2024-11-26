@@ -14,7 +14,9 @@
 <body>
     <nav class="navbar navbar-expand border-bottom bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url_for('main_bp.index') }}">MDSs</a>
+            <a class="navbar-brand" href="{{ url_for('main_bp.index') }}">
+                <img src="/static/img/logo.svg" width="120" alt="MDSs">
+            </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link {{ 'active' if request.path == url_for('main_bp.home') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.home') else 'false' }}" href="{{ url_for('main_bp.home') }}">Home</a>
