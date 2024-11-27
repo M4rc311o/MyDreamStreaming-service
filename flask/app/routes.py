@@ -49,9 +49,13 @@ def login():
     if form.validate_on_submit():
         username = bleach.clean(form.username.data)
         user = User.query.filter_by(username=username).first()
-        if user and ph.verify(user.password, form.password.data):
-            login_user(user)
-            return redirect(url_for('main_bp.profile'))
+        if user:
+            try:
+                ph.verify(user.password, form.password.data)
+                login_user(user)
+                return redirect(url_for('main_bp.profile'))
+            except Exception:
+                flash('Login Unsuccessful. Please check username and password', 'danger')    
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', form=form)
