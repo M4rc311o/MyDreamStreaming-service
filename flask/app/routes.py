@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify, current_app, session
 from flask_login import login_user, logout_user, login_required, current_user
-from app.forms import LoginForm, StreamInfoForm, StreamKeyForm, AvatarForm
+from app.forms import LoginForm, RegisterForm, StreamInfoForm, StreamKeyForm, AvatarForm
 from app.models import User
 from app import csrf
 from app import db
@@ -47,13 +47,32 @@ def login():
         return redirect(url_for('main_bp.profile'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        username = bleach.clean(form.username.data)
+        user = User.query.filter_by(username=username).first()
         if user and ph.verify(user.password, form.password.data):
             login_user(user)
             return redirect(url_for('main_bp.profile'))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', form=form)
+
+@main_bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main_bp.profile'))
+    form = RegisterForm()
+    if form.validate_on_submit():
+        username = bleach.clean(form.username.data)
+        if User.query.filter_by(username=username).first():
+            flash('User already exists', 'danger')
+        else:
+            password = ph.hash(form.password.data)
+            user = User(username=username, password=password)
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+            return redirect(url_for('main_bp.profile'))
+    return render_template('register.html', form=form)
 
 @main_bp.route('/logout')
 @login_required

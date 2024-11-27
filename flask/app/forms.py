@@ -9,6 +9,11 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     login = SubmitField('Login')
 
+class RegisterForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    register = SubmitField('Register')
+
 class StreamInfoForm(FlaskForm):
     name = StringField('Stream name', validators=[DataRequired()])
     save = SubmitField('Save')

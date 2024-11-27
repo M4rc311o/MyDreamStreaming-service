@@ -18,6 +18,9 @@ def create_app():
 
     db.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = 'main_bp.login'
+    login_manager.login_message = None
+    login_manager.login_message_category = None
     csrf.init_app(app)
 
     from .models import User
@@ -31,8 +34,8 @@ def create_app():
         app.register_blueprint(routes.main_bp)
         db.create_all()
 
-        if not User.query.first():
-            db.session.add(User(username="test", password=ph.hash("test")))
-            db.session.commit()
+        # if not User.query.first():
+        #     db.session.add(User(username="test", password=ph.hash("test")))
+        #     db.session.commit()
 
     return app
