@@ -4,14 +4,14 @@
     {% for i in range(9) %}
     <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
         <div class="card" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
-            <img src="https://picsum.photos/400/225" class="card-img-top" alt="Stream">
+            <img src="/screenshots/1.jpg" class="card-img-top" alt="Stream">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
                         <h5 class="card-title">Stream name</h5>
                         <p class="card-text">Streamer name</p>
                     </div>
-                    <img src="https://picsum.photos/50/50" class="rounded-circle" width="50px" height="50px" alt="Avatar">
+                    <img src="/static/avatar/1" class="rounded-circle" width="50px" height="50px" alt="Avatar">
                 </div>
             </div>
         </div>
@@ -33,10 +33,11 @@
                     preload="auto"
                     width="640"
                     height="264"
-                    poster="https://picsum.photos/1920/1080"
+                    poster="/screenshots/1.jpg"
                     data-setup="{}"
                 >
-                    <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                    <!-- <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" /> -->
+                    <source src="/hls/1/master.m3u8" type="application/x-mpegURL" />
                     <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that
