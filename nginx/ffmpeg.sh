@@ -1,25 +1,54 @@
 #!/bin/bash
+set -e
+
+on_die ()
+{
+    pkill -KILL -P $$
+}
+
+
 
 
 STREAM_NAME="$1"
+#echo "Stream Name: $STREAM_NAME" > /tmp/debug.txt 
+
+API_RESPONSE=$(curl -s "http://flask/api/keys/$1") 
+#echo "API Response: $API_RESPONSE" > /tmp/check_user_id.txt
+
+USER_ID=$(curl -s "http://flask/api/keys/$1" | jq -r '.data.user_id')
+#echo "User ID: $USER_ID" > /tmp/check_user_id2.txt 
+
+trap 'on_die' TERM
+
+
+
+
+
 RTMP_INPUT="rtmp://127.0.0.1:1935/live/$STREAM_NAME"
-OUTPUT_DIR="/var/hls/tmp_hls"
+#echo "$RTMP_INPUT" > /tmp/input.txt
+
+OUTPUT_DIR="/var/hls/tmp_hls/$STREAM_NAME"
+#echo "$OUTPUT_DIR" > /tmp/output.txt
 SCREENSHOT_DIR="/var/hls/screenshots"
 RECORDINGS_DIR="/var/hls/recordings"
 
-# Create master playlist
-MASTER_PLAYLIST="$OUTPUT_DIR/${STREAM_NAME}_master.m3u8"
-echo "#EXTM3U" > "$MASTER_PLAYLIST"
-echo "#EXT-X-STREAM-INF:BANDWIDTH=400000,RESOLUTION=640x360" >> "$MASTER_PLAYLIST"
-echo "${STREAM_NAME}_360.m3u8" >> "$MASTER_PLAYLIST"
-echo "#EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=854x480" >> "$MASTER_PLAYLIST"
-echo "${STREAM_NAME}_480.m3u8" >> "$MASTER_PLAYLIST"
-echo "#EXT-X-STREAM-INF:BANDWIDTH=2048000,RESOLUTION=1280x720" >> "$MASTER_PLAYLIST"
-echo "${STREAM_NAME}_720.m3u8" >> "$MASTER_PLAYLIST"
 
-# Start processing the stream
-/usr/bin/ffmpeg -i "$RTMP_INPUT" \
-    -map 0:v? -vf "fps=1/10,scale=400:-1" -q:v 2 "$SCREENSHOT_DIR/screenshot_%04d.jpg" \
-    -map 0:v? -vf "scale=640:360" -b:v 400k -preset fast -f hls -hls_time 2 -hls_playlist_type event -hls_flags append_list+discont_start -hls_list_size 300 "$OUTPUT_DIR/${STREAM_NAME}_360.m3u8" \
-    -map 0:v? -vf "scale=854:480" -b:v 800k -preset fast -f hls -hls_time 2 -hls_playlist_type event -hls_flags append_list+discont_start -hls_list_size 300 "$OUTPUT_DIR/${STREAM_NAME}_480.m3u8" \
-    -map 0:v? -vf "scale=1280:720" -b:v 2048k -preset fast -f hls -hls_time 2 -hls_playlist_type event -hls_flags append_list+discont_start -hls_list_size 300 "$OUTPUT_DIR/${STREAM_NAME}_720.m3u8" 
+
+ /usr/bin/ffmpeg -y -i "$RTMP_INPUT" \
+     -map 0:v? -vf "fps=1/10,scale=400:-1" -q:v 2 -update 1 "$SCREENSHOT_DIR/${STREAM_NAME}.jpg" \
+     -map 0:v? -map 0:a? -c:v copy -c:a copy -f mpegts "${RECORDINGS_DIR}/${STREAM_NAME}.ts" \
+    -preset fast -g 48 -sc_threshold 0 \
+    -map 0:v -map 0:a -map 0:v -map 0:a -map 0:v -map 0:a \
+    -s:v:0 640x360 -c:v:0 libx264 -b:v:0 400k \
+    -s:v:1 854x480 -c:v:1 libx264 -b:v:1 800k \
+    -s:v:2 1280x720 -c:v:2 libx264 -b:v:2 2048k \
+    -c:a copy \
+    -var_stream_map "v:0,a:0 v:1,a:1 v:2,a:2" \
+    -master_pl_name master.m3u8 \
+    -f hls -hls_time 2 -hls_list_size 300 \
+    -hls_segment_filename "$OUTPUT_DIR/${STREAM_NAME}_v%v/${STREAM_NAME}_sequence%d.ts" \
+    "$OUTPUT_DIR/${STREAM_NAME}_v%v/media.m3u8"   
+
+
+
+wait
