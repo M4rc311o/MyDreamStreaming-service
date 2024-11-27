@@ -69,7 +69,15 @@
                 } else {
                     showAlert("Error updating avatar", "danger");
                 }
-            });
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if(data.status == 'success') {
+                        showAlert("Avatar updated", "info");
+                    } else {
+                        showAlert("Error updating avatar", "danger");
+                    }
+                });
 
     });
 
@@ -125,7 +133,12 @@
 
     document.getElementById("copy-button").addEventListener("click", () => {
         const key = document.getElementById("stream-key").value;
-        navigator.clipboard.writeText(key);
+        try {
+            navigator.clipboard.writeText(key)
+            .then( () => showAlert("Stream key copied to clipboard", "info"));
+        } catch {
+            showAlert("Error copying stream key", "danger");
+        }
     });
 
     document.getElementById("show-button").addEventListener("click", function () {
