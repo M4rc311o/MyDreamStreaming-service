@@ -41,8 +41,6 @@
     <i class="bi bi-download"></i> OBS Scene Collection
 </a>
 <script>
-    const csrf_token = "{{ csrf_token() }}";
-
     document.getElementById("avatar-form").addEventListener("submit", (event) => {
         event.preventDefault();
         const avatar = document.getElementById("avatar").files[0];

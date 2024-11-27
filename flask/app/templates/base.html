@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="{{ session.get('theme') }}">
 
 <head>
     <meta charset="UTF-8" />
@@ -20,7 +20,7 @@
                 <img src="/static/img/logo.svg" width="120" alt="MDSs">
             </a>
             <ul class="navbar-nav">
-                <button type="button" id="dark-mode-button" class="btn"><i class="bi bi-moon-fill"></i></button>
+                <button type="button" id="dark-mode-button" class="btn"><i class="bi {{ 'bi-brightness-high-fill' if session.get('theme') == 'dark' else 'bi-moon-fill' }}"></i></button>
                 <li class="nav-item">
                     <a class="nav-link {{ 'active' if request.path == url_for('main_bp.home') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.home') else 'false' }}" href="{{ url_for('main_bp.home') }}">Home</a>
                 </li>
@@ -57,6 +57,8 @@
     </footer>
 
     <script>
+        const csrf_token = "{{ csrf_token() }}";
+
         function showAlert(message, category) {
             const alertContainer = document.getElementById("alert-container");
 
@@ -87,11 +89,29 @@
             if (isDarkMode) {
                 htmlElement.removeAttribute('data-bs-theme');
                 iconElement.className = 'bi bi-moon-fill';
-                localStorage.setItem('theme', 'light');
+                fetch("/theme", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrf_token,
+                    },
+                    body: JSON.stringify({
+                        theme: 'light',
+                    }),
+                });
             } else {
                 htmlElement.setAttribute('data-bs-theme', 'dark');
                 iconElement.className = 'bi bi-brightness-high-fill';
-                localStorage.setItem('theme', 'dark');
+                fetch("/theme", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrf_token,
+                    },
+                    body: JSON.stringify({
+                        theme: 'dark',
+                    }),
+                });
             }
         });
     </script>

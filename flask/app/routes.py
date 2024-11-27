@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify, current_app
+from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify, current_app, session
 from flask_login import login_user, logout_user, login_required, current_user
 from app.forms import LoginForm, StreamInfoForm, StreamKeyForm, AvatarForm
 from app.models import User
@@ -20,6 +20,26 @@ def index():
 @main_bp.route('/home')
 def home():
     return render_template('home.html')
+
+@main_bp.route("/theme", methods=['PUT'])
+def theme():
+    theme_data = request.get_json()
+    theme = theme_data.get('theme')
+    if theme in ['light', 'dark']:
+        session['theme'] = theme
+        return jsonify({
+            'status': 'success',
+            'data': {
+                'theme': session['theme'],
+            },
+        })
+
+    return jsonify({
+            'status': 'error',
+            'data': {
+                'theme': session['theme'],
+            },
+        })
 
 @main_bp.route('/login', methods=['GET', 'POST'])
 def login():
