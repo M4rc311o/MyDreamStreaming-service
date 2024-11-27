@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 from argon2 import PasswordHasher
+import secrets
 import os
 
 db = SQLAlchemy()
@@ -12,7 +13,7 @@ ph = PasswordHasher(time_cost=3, memory_cost=65536)
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'CHANGE_ME')
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', secrets.token_urlsafe(32))
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///mdss.db"
 
     db.init_app(app)

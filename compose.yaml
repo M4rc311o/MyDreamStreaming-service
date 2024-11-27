@@ -13,8 +13,12 @@ services:
   flask:
     build: ./flask
     container_name: flask-mdss
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
     volumes:
       - avatars:/mdss/app/static/avatar
+      - db:/mdss/instance
 
 volumes:
   avatars:
+  db:
