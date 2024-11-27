@@ -1,4 +1,66 @@
 {
+    "DesktopAudioDevice1": {
+        "prev_ver": 503447555,
+        "name": "Desktop Audio",
+        "uuid": "",
+        "id": "wasapi_output_capture",
+        "versioned_id": "wasapi_output_capture",
+        "settings": {
+            "device_id": "default"
+        },
+        "mixers": 255,
+        "sync": 0,
+        "flags": 0,
+        "volume": 1.0,
+        "balance": 0.5,
+        "enabled": true,
+        "muted": false,
+        "push-to-mute": false,
+        "push-to-mute-delay": 0,
+        "push-to-talk": false,
+        "push-to-talk-delay": 0,
+        "hotkeys": {
+            "libobs.mute": [],
+            "libobs.unmute": [],
+            "libobs.push-to-mute": [],
+            "libobs.push-to-talk": []
+        },
+        "deinterlace_mode": 0,
+        "deinterlace_field_order": 0,
+        "monitoring_type": 0,
+        "private_settings": {}
+    },
+    "AuxAudioDevice1": {
+        "prev_ver": 503447555,
+        "name": "Mic/Aux",
+        "uuid": "",
+        "id": "wasapi_input_capture",
+        "versioned_id": "wasapi_input_capture",
+        "settings": {
+            "device_id": "default"
+        },
+        "mixers": 255,
+        "sync": 0,
+        "flags": 0,
+        "volume": 1.0,
+        "balance": 0.5,
+        "enabled": true,
+        "muted": false,
+        "push-to-mute": false,
+        "push-to-mute-delay": 0,
+        "push-to-talk": false,
+        "push-to-talk-delay": 0,
+        "hotkeys": {
+            "libobs.mute": [],
+            "libobs.unmute": [],
+            "libobs.push-to-mute": [],
+            "libobs.push-to-talk": []
+        },
+        "deinterlace_mode": 0,
+        "deinterlace_field_order": 0,
+        "monitoring_type": 0,
+        "private_settings": {}
+    }, 
     "current_scene": "Speaker",
     "current_program_scene": "Speaker",
     "scene_order": [
@@ -50,31 +112,6 @@
         "type2": 3
     },
     "modules": {
-        "scripts-tool": [],
-        "output-timer": {
-            "streamTimerHours": 0,
-            "streamTimerMinutes": 0,
-            "streamTimerSeconds": 30,
-            "recordTimerHours": 0,
-            "recordTimerMinutes": 0,
-            "recordTimerSeconds": 30,
-            "autoStartStreamTimer": false,
-            "autoStartRecordTimer": false,
-            "pauseRecordTimer": true
-        },
-        "auto-scene-switcher": {
-            "interval": 300,
-            "non_matching_scene": "",
-            "switch_if_not_matching": false,
-            "active": false,
-            "switches": []
-        },
-        "captions": {
-            "source": "",
-            "enabled": false,
-            "lang_id": 1033,
-            "provider": "mssapi"
-        }
     },
     "resolution": {
         "x": 0,
@@ -84,7 +121,7 @@
         {
             "prev_ver": 503447555,
             "name": "Browser1",
-            "uuid": "9ca1a7ee-21bb-4026-9914-9e49bfa5092c",
+            "uuid": "",
             "id": "browser_source",
             "versioned_id": "browser_source",
             "settings": {
@@ -117,7 +154,7 @@
         {
             "prev_ver": 503447555,
             "name": "Browser2",
-            "uuid": "bfee7b8f-ca85-4028-815e-187616fc4daf",
+            "uuid": "",
             "id": "browser_source",
             "versioned_id": "browser_source",
             "settings": {
@@ -154,7 +191,7 @@
         {
             "prev_ver": 503447555,
             "name": "Browser3",
-            "uuid": "a5766427-9b9c-426d-bc4d-8fe339ed072e",
+            "uuid": "",
             "id": "browser_source",
             "versioned_id": "browser_source",
             "settings": {
@@ -186,7 +223,7 @@
         {
             "prev_ver": 503447555,
             "name": "Camera",
-            "uuid": "3ef2766e-8e41-4bb1-ad44-fff91a503a37",
+            "uuid": "",
             "id": "dshow_input",
             "versioned_id": "dshow_input",
             "settings": {
@@ -219,7 +256,7 @@
         {
             "prev_ver": 503447555,
             "name": "Display Capture",
-            "uuid": "dcf04513-6ab4-42af-bc65-9be33294a6c1",
+            "uuid": "",
             "id": "monitor_capture",
             "versioned_id": "monitor_capture",
             "settings": {
@@ -245,7 +282,7 @@
         {
             "prev_ver": 503447555,
             "name": "Slides",
-            "uuid": "e1e488b7-a64b-445e-91f7-90be00f80b5f",
+            "uuid": "",
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
@@ -254,7 +291,7 @@
                 "items": [
                     {
                         "name": "Display Capture",
-                        "source_uuid": "dcf04513-6ab4-42af-bc65-9be33294a6c1",
+                        "source_uuid": "",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
@@ -293,7 +330,7 @@
                     },
                     {
                         "name": "Browser3",
-                        "source_uuid": "a5766427-9b9c-426d-bc4d-8fe339ed072e",
+                        "source_uuid": "",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
@@ -358,7 +395,7 @@
         {
             "prev_ver": 503447555,
             "name": "Speaker",
-            "uuid": "83bd8a83-047c-48cd-b6e4-5a75921a8546",
+            "uuid": "",
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
@@ -367,7 +404,7 @@
                 "items": [
                     {
                         "name": "Camera",
-                        "source_uuid": "3ef2766e-8e41-4bb1-ad44-fff91a503a37",
+                        "source_uuid": "",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
@@ -406,7 +443,7 @@
                     },
                     {
                         "name": "Browser1",
-                        "source_uuid": "9ca1a7ee-21bb-4026-9914-9e49bfa5092c",
+                        "source_uuid": "",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
@@ -471,7 +508,7 @@
         {
             "prev_ver": 503447555,
             "name": "Speaker_and_Slides",
-            "uuid": "e9276fe3-b9e5-4924-a1ee-37971e8394ff",
+            "uuid": "",
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
@@ -480,7 +517,7 @@
                 "items": [
                     {
                         "name": "Display Capture",
-                        "source_uuid": "dcf04513-6ab4-42af-bc65-9be33294a6c1",
+                        "source_uuid": "",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
@@ -519,7 +556,7 @@
                     },
                     {
                         "name": "Camera",
-                        "source_uuid": "3ef2766e-8e41-4bb1-ad44-fff91a503a37",
+                        "source_uuid": "",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
@@ -558,7 +595,7 @@
                     },
                     {
                         "name": "Browser2",
-                        "source_uuid": "bfee7b8f-ca85-4028-815e-187616fc4daf",
+                        "source_uuid": "",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
