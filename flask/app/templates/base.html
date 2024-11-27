@@ -20,6 +20,7 @@
                 <img src="/static/img/logo.svg" width="120" alt="MDSs">
             </a>
             <ul class="navbar-nav">
+                <button type="button" id="dark-mode-button" class="btn"><i class="bi bi-moon-fill"></i></button>
                 <li class="nav-item">
                     <a class="nav-link {{ 'active' if request.path == url_for('main_bp.home') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.home') else 'false' }}" href="{{ url_for('main_bp.home') }}">Home</a>
                 </li>
@@ -77,6 +78,22 @@
                 rowDiv.remove();
             }, 3000);
         }
+
+        document.getElementById('dark-mode-button').addEventListener('click', function () {
+            const htmlElement = document.documentElement;
+            const iconElement = this.querySelector('i');
+            const isDarkMode = htmlElement.getAttribute('data-bs-theme') === 'dark';
+
+            if (isDarkMode) {
+                htmlElement.removeAttribute('data-bs-theme');
+                iconElement.className = 'bi bi-moon-fill';
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.setAttribute('data-bs-theme', 'dark');
+                iconElement.className = 'bi bi-brightness-high-fill';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
     </script>
 </body>
 

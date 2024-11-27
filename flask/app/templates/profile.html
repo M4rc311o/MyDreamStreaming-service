@@ -128,11 +128,18 @@
         navigator.clipboard.writeText(key);
     });
 
-    document.getElementById("show-button").addEventListener("click", () => {
-        const keyEl = document.getElementById("stream-key");
-        keyEl.setAttribute("type", keyEl.getAttribute("type") === "password" ? "text" : "password");
+    document.getElementById("show-button").addEventListener("click", function () {
+        const keyElement = document.getElementById("stream-key");
+        const iconElement = this.querySelector('i');
+        const isHidden = keyElement.getAttribute("type") === "password";
 
-        document.getElementById("show-button").innerHTML = keyEl.getAttribute("type") === "password" ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+        if (isHidden) {
+            keyElement.setAttribute("type", "text");
+            iconElement.className = 'bi bi-eye-slash';
+        } else {
+            keyElement.setAttribute("type", "password");
+            iconElement.className = 'bi bi-eye';
+        }
     });
 </script>
 {% endblock %}
