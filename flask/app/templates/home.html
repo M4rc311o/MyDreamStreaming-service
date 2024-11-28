@@ -1,43 +1,42 @@
 {% extends "base.html" %} {% block content %}
 <h2>Streams</h2>
 <div class="row">
-    {% for i in range(9) %}
+    {% for user in users %}
     <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
-        <div class="card" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
-            <img src="/screenshots/1.jpg" class="card-img-top" alt="Stream">
+        <div class="card" data-bs-toggle="modal" data-bs-target="#streamModal" data-bs-stream-name="{{ user.stream_name }}" data-bs-user-id="{{ user.id }}" style="cursor: pointer;">
+            <img src="/screenshots/{{ user.id }}.jpg" class="card-img-top" alt="Stream">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h5 class="card-title">Stream name</h5>
-                        <p class="card-text">Streamer name</p>
+                        <h5 class="card-title">{{ user.stream_name }}</h5>
+                        <p class="card-text">{{ user.username }}</p>
                     </div>
-                    <img src="{{ url_for('static', filename='avatar/1') }}" class="rounded-circle" width="50px" height="50px" onerror="this.style.display='none';" alt="Avatar">
+                    <img src="{{ url_for('static', filename='avatar/' ~ user.id) }}" class="rounded-circle" width="50px" height="50px" onerror="this.style.display='none';" alt="Avatar">
                 </div>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="streamModal" tabindex="-1" aria-labelledby="streamModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Stream name</h1>
+                <h1 class="modal-title fs-5" id="streamModalLabel">Stream name</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
                 <video
-                    id="my-video"
+                    id="stream-player"
                     class="video-js vjs-fluid"
                     controls
                     preload="auto"
                     width="640"
                     height="264"
-                    poster="/screenshots/1.jpg"
+                    poster=""
                     data-setup="{}"
                 >
-                    <!-- <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" /> -->
-                    <source src="/hls/1/master.m3u8" type="application/x-mpegURL" />
+                    <!-- <source src="" type="application/x-mpegURL" /> -->
                     <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that
@@ -60,4 +59,35 @@
         cursor: pointer;
     }
 </style>
+
+<script>
+    const streamModal = document.getElementById('streamModal');
+    if (streamModal) {
+        streamModal.addEventListener('show.bs.modal', event => {
+            const card = event.relatedTarget;
+            const streamName = card.getAttribute('data-bs-stream-name');
+            const userId = card.getAttribute('data-bs-user-id');
+
+            const modalTitle = streamModal.querySelector('.modal-title');
+            // const videoElement = streamModal.querySelector('#stream-player');
+
+            modalTitle.textContent = streamName;
+
+            // if (video) {
+            //     const sourceElement = videoElement.querySelector('source');
+            //     if (sourceElement) {
+            //         sourceElement.setAttribute('src', `/hls/${userId}/master.m3u8`);
+            //     }
+            //     videoElement.setAttribute('poster', `/screenshots/${userId}.jpg`);
+            // }
+            let player = videojs('stream-player');
+            player.src({type: 'application/x-mpegURL', src: `/hls/${userId}/master.m3u8`});
+            player.poster(`/screenshots/${userId}.jpg`);
+        });
+        streamModal.addEventListener('hide.bs.modal', event => {
+            let player = videojs('stream-player');
+            player.reset();
+        });
+    }
+</script>
 {% endblock %}

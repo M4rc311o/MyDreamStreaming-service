@@ -20,7 +20,8 @@ def index():
 
 @main_bp.route('/home')
 def home():
-    return render_template('home.html')
+    users = get_streaming_users()
+    return render_template('home.html', users=users)
 
 @main_bp.route("/theme", methods=['PUT'])
 def theme():
@@ -209,23 +210,23 @@ def key_validate():
                 'data': None,
             }), 400
     
-@main_bp.route('/api/streams')
-def streams():
-    response = requests.get('http://nginx:8080/stat')
-    if response.status_code == 200:
-        streams = []
-        root = ET.fromstring(response.text)
-        for stream_key_el in root.findall(".//server/application/live/stream/name"):
-            user = User.query.filter_by(stream_key=stream_key_el.text).first()
-            if user:
-                streams.append({"name": user.stream_name})
+# @main_bp.route('/api/streams')
+# def streams():
+#     response = requests.get('http://nginx:8080/stat')
+#     if response.status_code == 200:
+#         streams = []
+#         root = ET.fromstring(response.text)
+#         for stream_key_el in root.findall(".//server/application/live/stream/name"):
+#             user = User.query.filter_by(stream_key=stream_key_el.text).first()
+#             if user:
+#                 streams.append({"name": user.stream_name})
 
-        return jsonify({
-                'status': 'success',
-                'data': {
-                    'streams': streams,
-                },
-            })
+#         return jsonify({
+#                 'status': 'success',
+#                 'data': {
+#                     'streams': streams,
+#                 },
+#             })
     
 @main_bp.route('/api/streams/<int:stream_id>/overlay')
 def stream(stream_id):
@@ -234,3 +235,15 @@ def stream(stream_id):
         return render_template('stream_overlay.html', user=user)
     else:
         return "Stream name not found", 404
+    
+def get_streaming_users():
+    users = []
+    response = requests.get('http://nginx:8080/stat')
+    if response.status_code == 200:
+        root = ET.fromstring(response.text)
+        for stream_key_el in root.findall(".//server/application/live/stream/name"):
+            user = User.query.filter_by(stream_key=stream_key_el.text).first()
+            if user:
+                users.append(user)
+
+    return users
