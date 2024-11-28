@@ -125,7 +125,7 @@
             "id": "browser_source",
             "versioned_id": "browser_source",
             "settings": {
-                "url": "http://localhost:8080/api/streams/1/overlay",
+                "url": "{{ base_address }}/api/streams/{{ user_id }}/overlay",
                 "restart_when_active": true,
                 "width": 1920,
                 "height": 1080
@@ -160,7 +160,7 @@
             "id": "browser_source",
             "versioned_id": "browser_source",
             "settings": {
-                "url": "http://localhost:8080/api/streams/1/overlay",
+                "url": "{{ base_address }}/api/streams/{{ user_id }}/overlay",
                 "shutdown": false,
                 "reroute_audio": false,
                 "fps_custom": false,
@@ -198,7 +198,7 @@
             "id": "browser_source",
             "versioned_id": "browser_source",
             "settings": {
-                "url": "http://localhost:8080/api/streams/1/overlay",
+                "url": "{{ base_address }}/api/streams/{{ user_id }}/overlay",
                 "width": 1920,
                 "height": 1080,
                 "restart_when_active": true

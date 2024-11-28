@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify, current_app, session
+from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify, current_app, session, make_response
 from flask_login import login_user, logout_user, login_required, current_user
 from app.forms import LoginForm, RegisterForm, StreamInfoForm, StreamKeyForm, AvatarForm
 from app.models import User
 from app import csrf
 from app import db
 from app import ph
+from jinja2 import Template
 import app.keygen as keygen
 import bleach
 import xml.etree.ElementTree as ET
@@ -111,6 +112,24 @@ def upload():
             'status': 'error',
             'data': None,
         })
+
+@main_bp.route('/scenes')
+@login_required
+def scenes():
+    scenes_path = os.path.join(current_app.static_folder, 'OBS_Scenes.json')
+
+    with open(scenes_path, 'r') as f:
+        scenes_c = f.read()
+
+    template = Template(scenes_c)
+    data = {
+        "user_id": str(current_user.id),
+        "base_address": 'http://127.0.0.1:8080',
+    }
+    scenes_json = template.render(data)
+    response = make_response(scenes_json)
+    response.headers['Content-Type'] = 'application/json'
+    return response
 
 @main_bp.route('/api/stream', methods=['GET', 'PUT'])
 @login_required
