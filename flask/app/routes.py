@@ -124,7 +124,7 @@ def scenes():
     template = Template(scenes_c)
     data = {
         "user_id": str(current_user.id),
-        "base_address": 'http://127.0.0.1:8080',
+        "base_address": os.getenv('BASE_ADDRESS', 'http://localhost'),
     }
     scenes_json = template.render(data)
     response = make_response(scenes_json)
