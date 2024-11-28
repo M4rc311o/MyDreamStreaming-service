@@ -40,7 +40,7 @@ def theme():
             'data': {
                 'theme': session['theme'],
             },
-        })
+        }), 400
 
 @main_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -164,7 +164,7 @@ def stream_key():
         })
 
 @main_bp.route('/api/keys/<key>')
-def stream_key_validate(key):
+def key(key):
     user = User.query.filter_by(stream_key=key).first()
     if user:
         return jsonify({
@@ -180,7 +180,34 @@ def stream_key_validate(key):
                 'data': {
                     'state': 'invalid',
                 },
-            }), 401
+            })
+    
+@main_bp.route('/api/keys/validate', methods=['POST'])
+@csrf.exempt
+def key_validate():
+    key = request.form.get('name')
+    if key:
+        user = User.query.filter_by(stream_key=key).first()
+        if user:
+            return jsonify({
+                    'status': 'success',
+                    'data': {
+                        'state': 'valid',
+                        'user_id': user.id,
+                    },
+                })
+        else:
+            return jsonify({
+                    'status': 'success',
+                    'data': {
+                        'state': 'invalid',
+                    },
+                }), 401
+    else:
+        return jsonify({
+                'status': 'Error',
+                'data': None,
+            }), 400
     
 @main_bp.route('/api/streams')
 def streams():
