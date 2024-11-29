@@ -17,6 +17,7 @@ The web application is available via [http://localhost:8080/](http://localhost:8
 1. [Home](http://localhost:8080/home) - Main page to watch, download and rewind the streams.
 2. [Login](http://localhost:8080/login) - Subpage for login in or creating a new user account.
 3. [Profile](http://localhost:8080/profile) - Subpage allows logged users to:
+
       a. Edit stream settings - stream name and avatar.
       b. (Re)generate the Stream key.
       c. Download the OBS Scenes. 
