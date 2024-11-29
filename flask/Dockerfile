@@ -22,5 +22,5 @@ RUN curl -L -o /mdss/app/static/js/purify.min.js https://unpkg.com/dompurify@lat
 
 EXPOSE 80
 
-#ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:80", "wsgi:app"]
-ENTRYPOINT ["python", "-u", "wsgi.py"]
+ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:80", "wsgi:app"]
+#ENTRYPOINT ["python", "-u", "wsgi.py"]
