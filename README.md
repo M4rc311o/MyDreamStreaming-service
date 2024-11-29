@@ -25,8 +25,8 @@ The web application is available via [http://localhost:8080/](http://localhost:8
       c. Download the OBS Scenes. 
 5. [Recordings](http://localhost:8080/rec) - Provides option to download the latest streams of the users.
 #### Notes:
-- Application has also **Light** and **Dark** mode available! - Coolest feature ever.
-- Every player has option to choose from four different video qualities. - SICK!
+- Application offers the **Light** and **Dark** mode! - Coolest feature ever.
+- Each video player provides the option to choose from four different video qualities. - SICK!
 
 
 ### OBS Studio
