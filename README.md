@@ -32,8 +32,8 @@ To import the Scenes into OBS Studio follow the steps:
  
 ## Requirements
 Before deploying MDSs, make sure you have these bad boys:
-[Docker Desktop](https://www.docker.com/products/docker-desktop/)
-[OBS Studio](https://obsproject.com/download)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [OBS Studio](https://obsproject.com/download)
 
 ## Updates
 1. Pull new project
