@@ -4,10 +4,10 @@
     {% for user in users %}
     <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
         <div class="card" data-bs-toggle="modal" data-bs-target="#streamModal" data-bs-stream-name="{{ user.stream_name }}" data-bs-user-id="{{ user.id }}" style="cursor: pointer;">
-            <img src="/screenshots/{{ user.id }}.jpg" class="card-img-top" alt="Stream">
+            <img src="/screenshots/{{ user.id }}.jpg" class="card-img-top"  onerror="this.style.display='none';" alt="Stream">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <div>
+                    <div class="text-truncate">
                         <h5 class="card-title">{{ user.stream_name }}</h5>
                         <p class="card-text">{{ user.username }}</p>
                     </div>
@@ -24,7 +24,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center">
             
-                <h1 class="modal-title fs-5 me-auto" id="streamModalLabel">Stream Name</h1>
+                <h1 class="modal-title fs-5 me-auto text-truncate" id="streamModalLabel">Stream Name</h1>
 
                 
                 <div class="d-flex align-items-center">
