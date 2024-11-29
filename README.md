@@ -13,8 +13,7 @@ docker compose up
 ```
 ## Using the MyDreamStreaming service
 ### Web application
-The web application is available via [http://localhost:8080/](http://localhost:8080/)
-Application is divided into following pages:
+The web application is available via [http://localhost:8080/](http://localhost:8080/) and is divided into following pages:
 1. [Home](http://localhost:8080/home) - Main page to watch, download and rewind the streams.
 2. [Login](http://localhost:8080/login) - Subpage for login in or creating a new user account.
 3. [Profile](http://localhost:8080/profile) - Subpage allows logged users to:
