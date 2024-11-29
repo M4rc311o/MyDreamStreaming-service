@@ -23,9 +23,9 @@ RECORDINGS_DIR="/var/hls/recordings"
      -map 0:v? -map 0:a? -c:v copy -c:a copy -f mpegts "${RECORDINGS_DIR}/${USER_ID}.ts" \
     -preset fast -g 48 -sc_threshold 0 \
     -map 0:v -map 0:a -map 0:v -map 0:a -map 0:v -map 0:a \
-    -s:v:0 640x360 -c:v:0 libx264 -b:v:0 400k -pix_fmt yuv420p -profile:v:0 high -level:v:0 4.0 \
-    -s:v:1 854x480 -c:v:1 libx264 -b:v:1 800k -pix_fmt yuv420p -profile:v:1 high -level:v:1 4.0 \
-    -s:v:2 1280x720 -c:v:2 libx264 -b:v:2 2048k -pix_fmt yuv420p -profile:v:2 high -level:v:2 4.0 \
+    -s:v:0 640x360 -c:v:0 libx264 -b:v:0 700k -pix_fmt yuv420p -profile:v:0 high -level:v:0 4.0 \
+    -s:v:1 854x480 -c:v:1 libx264 -b:v:1 1250k -pix_fmt yuv420p -profile:v:1 high -level:v:1 4.0 \
+    -s:v:2 1280x720 -c:v:2 libx264 -b:v:2 2500k -pix_fmt yuv420p -profile:v:2 high -level:v:2 4.0 \
     -c:a copy \
     -var_stream_map "v:0,a:0 v:1,a:1 v:2,a:2" \
     -master_pl_name master.m3u8 \
