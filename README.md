@@ -8,6 +8,7 @@ git clone gh repo clone M4rc311o/MyDreamStreaming-service
 ```
 To deploy MDSs instance clone this repository and run:
 ```sh
+cd MyDreamStreaming-service
 docker compose up
 ```
 ## Using the MyDreamStreaming service
