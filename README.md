@@ -38,7 +38,7 @@ To import the Scenes into OBS Studio follow the steps:
 4) **Starting Stream** -> Panel *Controls* -> *Settings* -> *Stream* -> Fill the forms *Server*: **rtmp://127.0.0.1/live** and *Stream Key* generated from [Web app Profile](http://localhost:8080/profile) 
  
 ## Requirements
-Before deploying MDSs, make sure you have these bad boys:
+Before deploying MDSs, make sure you have these bad boys installed:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [OBS Studio](https://obsproject.com/download)
 
