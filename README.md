@@ -10,19 +10,28 @@ To deploy MDSs instance clone this repository and run:
 ```sh
 docker compose up
 ```
-## Starting a using the MDSs
+## Using the MyDreamStreaming service
 ### Web application
-Web application is available from [http://localhost:8080/](http://localhost:8080/)
-Application is divided into 3 pages:
+The web application is available via [http://localhost:8080/](http://localhost:8080/)
+Application is divided into following pages:
 1. [Home](http://localhost:8080/home) - Main page to watch, download and rewind the streams.
-2. [Login](http://localhost:8080/login) - Subpage to login and create a new user account.
-3. [Profile](http://localhost:8080/profile) - Subpage allows logged users to edit the stream settings such as stream name, avatar and (re)generate the Stream key. There is also an option to download the OBS Scenes. 
-4. [Recordings](http://localhost:8080/rec) - Subpage allows download the latest streams of the users.
+2. [Login](http://localhost:8080/login) - Subpage for login in or creating a new user account.
+3. [Profile](http://localhost:8080/profile) - Subpage allows logged users to:
+   a) Edit stream settings - stream name and avatar.
+   b) (Re)generate the Stream key.
+   c) Download the OBS Scenes. 
+5. [Recordings](http://localhost:8080/rec) - Provides option to download the latest streams of the users.
 
 ### OBS Studio
-
-
+After logging in and editing basic settings of the stream in [Web app](#Web-application), download the OBS Scene Collection from the [Profile](http://localhost:8080/profile) subpage.
+To import the Scenes into OBS Studio follow the steps:
+1) **Import Scenes:** *Scene Collection* -> *Import* -> *(3 dots) ...* -> Select downloaded OBS Scenes (filename: *scenes.json*) and click *Import*
+2) **Select Scene:** *Scene Collection* -> Pick imported scene *MDS_Scenes*
+3) **Set input and output devices:** -> Panel *Scenes* -> *Speaker_and_Slides* scene -> double-click on *Camera* and *Display Capture* to configure prefered Camera and Display for streaming.
+4) **Starting Stream** -> Panel *Controls* -> *Settings* -> *Stream* -> Fill the forms *Server*: **rtmp://127.0.0.1/live** and *Stream Key* generated from [Web app Profile](http://localhost:8080/profile) 
+ 
 ## Requirements
+Before deploying MDSs, make sure you have these bad boys:
 [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 [OBS Studio](https://obsproject.com/download)
 
@@ -32,7 +41,7 @@ Application is divided into 3 pages:
 cd MyDreamStreaming-service
 git pull 
 ```
-2. Delete docker containers, volumes and images
+2. Delete existing Docker containers, volumes and images.
 3. Build the container again
 ```sh
 docker compose up --build
