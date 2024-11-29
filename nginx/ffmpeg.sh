@@ -33,5 +33,5 @@ RECORDINGS_DIR="/var/hls/recordings"
     -master_pl_name master.m3u8 \
     -f hls -hls_time 2 -hls_list_size 400 \
     -hls_segment_filename "$OUTPUT_DIR/${USER_ID}_v%v/${USER_ID}_sequence%d.ts" \
-    "$OUTPUT_DIR/${USER_ID}_v%v/media.m3u8"
+    "$OUTPUT_DIR/${USER_ID}_v%v/media.m3u8" &
 wait
