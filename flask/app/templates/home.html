@@ -16,15 +16,23 @@
             </div>
         </div>
     </div>
+
     {% endfor %}
 </div>
 <div class="modal fade" id="streamModal" tabindex="-1" aria-labelledby="streamModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="streamModalLabel">Stream name</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-flex justify-content-between align-items-center">
+            
+                <h1 class="modal-title fs-5 me-auto" id="streamModalLabel">Stream Name</h1>
+
+                
+                <div class="d-flex align-items-center">
+                    <a id="download-btn" href="#" class="btn  download-btn-style me-2" download> Download</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             </div>
+       
             <div class="modal-body text-center">
                 <video
                     id="stream-player"
@@ -34,7 +42,7 @@
                     width="640"
                     height="264"
                     poster=""
-                    data-setup="{}"
+                    data-setup='{"liveui": true}'
                 >
                     <!-- <source src="" type="application/x-mpegURL" /> -->
                     <p class="vjs-no-js">
@@ -58,6 +66,35 @@
         transition: transform 0.5s ease;
         cursor: pointer;
     }
+
+    .download-btn-style {
+        display: inline-block;         
+        padding: 10px 20px;           
+        background-color: #f8f9fa;    
+        border: 1px solid #ccc;      
+        border-radius: 5px;           
+        text-decoration: none;      
+        color: #000;                  
+        font-size: 16px;              
+        font-weight: 500;            
+        text-align: center;       
+        transition: all 0.3s ease;  
+    }
+
+
+    .download-btn-style:hover {
+        background-color: #e2e6ea;   
+        border-color: #adb5bd;        
+        color: #000;                  
+        text-decoration: none;       
+    }
+
+
+    .download-btn-style:active {
+        background-color: #d6d8db;  
+        border-color: #adb5bd;
+        transform: scale(0.98);      
+    }
 </style>
 
 <script>
@@ -70,8 +107,14 @@
 
             const modalTitle = streamModal.querySelector('.modal-title');
             // const videoElement = streamModal.querySelector('#stream-player');
+            const downloadBtn = streamModal.querySelector('#download-btn');
+
 
             modalTitle.textContent = streamName;
+
+            if (downloadBtn) {
+                downloadBtn.setAttribute('href', `/recording/${userId}.ts`);
+            }
 
             // if (video) {
             //     const sourceElement = videoElement.querySelector('source');
@@ -90,4 +133,25 @@
         });
     }
 </script>
+
+<script>
+    var player = videojs('stream-player');  
+    player.hlsQualitySelector();
+
+
+player.on('seeking', function() {
+    console.log('User is seeking to:', player.currentTime());
+});
+
+player.on('seeked', function() {
+    console.log('Seek complete. Video will continue from:', player.currentTime());
+    if (player.paused()) {
+        player.play();
+    }
+});
+player.on('timeupdate', function() {
+    console.log('Current playback time:', player.currentTime());
+});
+
+  </script>
 {% endblock %}
