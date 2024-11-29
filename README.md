@@ -19,7 +19,9 @@ The web application is available via [http://localhost:8080/](http://localhost:8
 3. [Profile](http://localhost:8080/profile) - Subpage allows logged users to:
 
       a. Edit stream settings - stream name and avatar.
+   
       b. (Re)generate the Stream key.
+   
       c. Download the OBS Scenes. 
 5. [Recordings](http://localhost:8080/rec) - Provides option to download the latest streams of the users.
 
