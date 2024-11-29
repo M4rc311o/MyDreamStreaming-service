@@ -31,7 +31,7 @@ RECORDINGS_DIR="/var/hls/recordings"
     -c:a copy \
     -var_stream_map "v:0,a:0 v:1,a:1 v:2,a:2 v:3,a:3" \
     -master_pl_name master.m3u8 \
-    -f hls -hls_time 2 -hls_list_size 500 \
+    -f hls -hls_time 2 -hls_list_size 305 \
     -hls_segment_filename "$OUTPUT_DIR/${USER_ID}_v%v/${USER_ID}_sequence%d.ts" \
     "$OUTPUT_DIR/${USER_ID}_v%v/media.m3u8"
 wait
