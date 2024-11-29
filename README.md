@@ -11,7 +11,7 @@ To deploy MDSs instance clone this repository and run:
 cd MyDreamStreaming-service
 docker compose up
 ```
-## Using the MyDreamStreaming service
+## Using the *MyDreamStreaming service*
 ### Web application 
 The web application is available via [http://localhost:8080/](http://localhost:8080/) and is divided into following pages:
 1. [Home](http://localhost:8080/home) - Main page to watch, download and rewind the streams.  
@@ -32,10 +32,10 @@ The web application is available via [http://localhost:8080/](http://localhost:8
 ### OBS Studio
 After logging in and editing basic settings of the stream in [Web app](#Web-application), download the OBS Scene Collection from the [Profile](http://localhost:8080/profile) subpage.
 To import the Scenes into OBS Studio follow the steps:
-1) **Import Scenes:** *Scene Collection* -> *Import* -> *(3 dots)* -> Select downloaded OBS Scenes (filename: *scenes.json*) and click *Import*
-2) **Select Scene:** *Scene Collection* -> Pick imported scene *MDS_Scenes*
+1) **Import Scenes:** *Scene Collection* -> *Import* -> *(3 dots)* -> Select downloaded OBS Scenes (filename: *scenes.json*) and click *Import*.
+2) **Select Scene:** *Scene Collection* -> Pick imported scene *MDS_Scenes*.
 3) **Set input and output devices:** -> Panel *Scenes* -> *Speaker_and_Slides* scene -> double-click on *Camera* and *Display Capture* to configure prefered Camera and Display for streaming.
-4) **Starting Stream** -> Panel *Controls* -> *Settings* -> *Stream* -> Fill the forms *Server*: **rtmp://127.0.0.1/live** and *Stream Key* generated from [Web app Profile](http://localhost:8080/profile) 
+4) **Starting Stream** -> Panel *Controls* -> *Settings* -> *Stream* -> Fill the forms *Server*: **rtmp://127.0.0.1/live** and *Stream Key* generated from [Web app Profile](http://localhost:8080/profile).
  
 ## Requirements
 Before deploying MDSs, make sure you have these bad boys installed:
@@ -43,13 +43,13 @@ Before deploying MDSs, make sure you have these bad boys installed:
 - [OBS Studio](https://obsproject.com/download)
 
 ## Updates
-1. Pull new project
+1. Pull new project.
 ```sh
 cd MyDreamStreaming-service
 git pull 
 ```
 2. Delete existing Docker containers, volumes and images.
-3. Build the container again
+3. Build the container again.
 ```sh
 docker compose up --build
 ```
