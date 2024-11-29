@@ -24,7 +24,7 @@ def home():
     users = get_streaming_users()
     return render_template('home.html', users=users)
 
-@main_bp.route("/rec")
+@main_bp.route("/recordings")
 def recordings():
     recordings = []
     directory_path = "/recordings"
