@@ -16,12 +16,12 @@ RTMP_INPUT="rtmp://127.0.0.1:1935/live/$STREAM_NAME"
 OUTPUT_DIR="/var/hls/tmp_hls/$USER_ID"
 SCREENSHOT_DIR="/var/hls/screenshots"
 RECORDINGS_DIR="/var/hls/recordings"
-DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+
 
 /usr/bin/ffmpeg -y -i "$RTMP_INPUT" \
      -map 0:v? -vf "fps=1,scale=400:-1" -frames:v 1 "$SCREENSHOT_DIR/${USER_ID}.jpg" \
      -map 0:v? -vf "fps=1/10,scale=400:-1" -q:v 2 -update 1 "$SCREENSHOT_DIR/${USER_ID}.jpg" \
-     -map 0:v? -map 0:a? -c:v copy -c:a copy -f mpegts "${RECORDINGS_DIR}/${USER_ID}_${DATE}.ts" \
+     -map 0:v? -map 0:a? -c:v copy -c:a copy -f mpegts "${RECORDINGS_DIR}/${USER_ID}.ts" \
     -preset fast -g 48 -sc_threshold 0 \
     -map 0:v -map 0:a -map 0:v -map 0:a -map 0:v -map 0:a -map 0:v -map 0:a \
     -c:v:0 copy -c:a:0 copy \
