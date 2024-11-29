@@ -8,6 +8,7 @@ services:
     environment:
       DOMAIN: ${DOMAIN:-localhost}
     volumes:
+      - recordings:/var/hls/recordings
       - ./nginx/stat.xsl:/etc/nginx/mdss/stat.xsl:ro
       - ./nginx/site:/etc/nginx/mdss/site
 
@@ -20,7 +21,9 @@ services:
     volumes:
       - avatars:/mdss/app/static/avatar
       - db:/mdss/instance
+      - recordings:/recordings
 
 volumes:
   avatars:
   db:
+  recordings:

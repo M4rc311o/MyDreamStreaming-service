@@ -1,0 +1,8 @@
+{% extends "base.html" %} {% block content %}
+<h2>Recordings</h2>
+<div class="list-group">
+{% for recording in recordings %}
+    <a href="/recordings/{{ recording.file_name }}" class="list-group-item list-group-item-action">{{ recording.username }}</a>
+{% endfor %}
+</ul>
+{% endblock %}

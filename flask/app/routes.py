@@ -23,6 +23,23 @@ def home():
     users = get_streaming_users()
     return render_template('home.html', users=users)
 
+@main_bp.route("/rec")
+def recordings():
+    recordings = []
+    directory_path = "/recordings"
+    for f in os.scandir(directory_path):
+        if f.is_file():
+            file_name = f.name
+            id = os.path.splitext(file_name)[0]
+            user = User.query.filter_by(id=id).first()
+            if user:
+                recordings.append({
+                        'file_name': file_name,
+                        'username': user.username,
+                    })
+
+    return render_template('recordings.html', recordings=recordings)
+
 @main_bp.route("/theme", methods=['PUT'])
 def theme():
     theme_data = request.get_json()
