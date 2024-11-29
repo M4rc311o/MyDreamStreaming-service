@@ -26,7 +26,7 @@ Application is divided into following pages:
 ### OBS Studio
 After logging in and editing basic settings of the stream in [Web app](#Web-application), download the OBS Scene Collection from the [Profile](http://localhost:8080/profile) subpage.
 To import the Scenes into OBS Studio follow the steps:
-1) **Import Scenes:** *Scene Collection* -> *Import* -> *(3 dots) ...* -> Select downloaded OBS Scenes (filename: *scenes.json*) and click *Import*
+1) **Import Scenes:** *Scene Collection* -> *Import* -> *(3 dots)* -> Select downloaded OBS Scenes (filename: *scenes.json*) and click *Import*
 2) **Select Scene:** *Scene Collection* -> Pick imported scene *MDS_Scenes*
 3) **Set input and output devices:** -> Panel *Scenes* -> *Speaker_and_Slides* scene -> double-click on *Camera* and *Display Capture* to configure prefered Camera and Display for streaming.
 4) **Starting Stream** -> Panel *Controls* -> *Settings* -> *Stream* -> Fill the forms *Server*: **rtmp://127.0.0.1/live** and *Stream Key* generated from [Web app Profile](http://localhost:8080/profile) 
