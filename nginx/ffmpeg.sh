@@ -24,7 +24,7 @@ RECORDINGS_DIR="/var/hls/recordings"
      -map 0:v? -map 0:a? -c:v copy -c:a copy -f mpegts "${RECORDINGS_DIR}/${USER_ID}.ts" \
     -preset fast -g 48 -sc_threshold 0 \
     -map 0:v -map 0:a -map 0:v -map 0:a -map 0:v -map 0:a -map 0:v -map 0:a \
-    -c:v:0 copy -c:a:0 copy \
+    -c:v:0 libx264 -pix_fmt yuv420p -level:v:0 4.0 \
     -s:v:1 640x360 -c:v:1 libx264 -b:v:1 700k -pix_fmt yuv420p -profile:v:1 high -level:v:1 4.0 \
     -s:v:2 854x480 -c:v:2 libx264 -b:v:2 1250k -pix_fmt yuv420p -profile:v:2 high -level:v:2 4.0 \
     -s:v:3 1280x720 -c:v:3 libx264 -b:v:3 2500k -pix_fmt yuv420p -profile:v:3 high -level:v:3 4.0 \
