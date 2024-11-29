@@ -11,6 +11,7 @@ import bleach
 import xml.etree.ElementTree as ET
 import requests
 import os
+import time
 
 main_bp = Blueprint("main_bp", __name__)
 
@@ -33,9 +34,11 @@ def recordings():
             id = os.path.splitext(file_name)[0]
             user = User.query.filter_by(id=id).first()
             if user:
+                ctime = time.ctime(f.stat().st_ctime)
                 recordings.append({
                         'file_name': file_name,
                         'username': user.username,
+                        'time': ctime,
                     })
 
     return render_template('recordings.html', recordings=recordings)

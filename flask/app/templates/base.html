@@ -26,6 +26,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ 'active' if request.path == url_for('main_bp.home') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.home') else 'false' }}" href="{{ url_for('main_bp.home') }}">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ 'active' if request.path == url_for('main_bp.recordings') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.recordings') else 'false' }}" href="{{ url_for('main_bp.recordings') }}">Recordings</a>
+                </li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link {{ 'active' if request.path == url_for('main_bp.profile') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.profile') else 'false' }}" href="{{ url_for('main_bp.profile') }}">Profile</a>

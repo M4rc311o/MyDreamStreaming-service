@@ -2,7 +2,10 @@
 <h2>Recordings</h2>
 <div class="list-group">
 {% for recording in recordings %}
-    <a href="/recordings/{{ recording.file_name }}" class="list-group-item list-group-item-action">{{ recording.username }}</a>
+    <a href="/recordings/{{ recording.file_name }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <span class="fw-bold">{{ recording.username }}</span>
+        <span class="text-body-secondary">{{ recording.time }}</span>
+    </a>
 {% endfor %}
 </ul>
 {% endblock %}

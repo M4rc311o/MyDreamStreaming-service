@@ -3,7 +3,7 @@ FROM python:3.12.7-slim
 WORKDIR /mdss
 
 RUN apt-get update && \
-    apt-get install -y curl && \
+    apt-get install -y curl tzdata && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .

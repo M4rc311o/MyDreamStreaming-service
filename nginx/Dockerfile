@@ -1,7 +1,7 @@
 FROM tiangolo/nginx-rtmp:latest-2024-11-11
 
 RUN apt-get update && \
-    apt-get install -y ffmpeg gettext-base && \
+    apt-get install -y ffmpeg gettext-base tzdata && \
     rm -rf /var/lib/apt/lists/*
     
 RUN  wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
