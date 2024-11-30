@@ -43,7 +43,7 @@ Before deploying MDSs, make sure you have these bad boys installed:
 - [OBS Studio](https://obsproject.com/download)
 
 ## Updates
-1. Pull new project.
+1. Pull updated project.
 ```sh
 cd MyDreamStreaming-service
 git pull 
