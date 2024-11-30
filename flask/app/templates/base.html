@@ -21,35 +21,33 @@
             <a class="navbar-brand" href="{{ url_for('main_bp.index') }}">
                 <img src="/static/img/logo.svg" width="120" alt="MDSs">
             </a>
-            <div class="d-flex align-items-center ms-auto">
-                <button type="button" id="dark-mode-button" class="btn ms-auto me-2">
-                    <i class="bi {{ 'bi-brightness-high-fill' if session.get('theme') == 'dark' else 'bi-moon' }}"></i>
-                </button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link {{ 'active' if request.path == url_for('main_bp.home') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.home') else 'false' }}" href="{{ url_for('main_bp.home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ 'active' if request.path == url_for('main_bp.recordings') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.recordings') else 'false' }}" href="{{ url_for('main_bp.recordings') }}">Recordings</a>
-                        </li>
-                        {% if current_user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link {{ 'active' if request.path == url_for('main_bp.profile') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.profile') else 'false' }}" href="{{ url_for('main_bp.profile') }}">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main_bp.logout') }}">Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link {{ 'active' if request.path == url_for('main_bp.login') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.login') else 'false' }}" href="{{ url_for('main_bp.login') }}">Login</a>
-                        </li>
-                        {% endif %}
-                    </ul>         
-                </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <button type="button" id="dark-mode-button" class="btn me-2">
+                        <i class="bi {{ 'bi-brightness-high-fill' if session.get('theme') == 'dark' else 'bi-moon' }}"></i>
+                    </button>
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.path == url_for('main_bp.home') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.home') else 'false' }}" href="{{ url_for('main_bp.home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.path == url_for('main_bp.recordings') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.recordings') else 'false' }}" href="{{ url_for('main_bp.recordings') }}">Recordings</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.path == url_for('main_bp.profile') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.profile') else 'false' }}" href="{{ url_for('main_bp.profile') }}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main_bp.logout') }}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.path == url_for('main_bp.login') }}" aria-current="{{ 'page' if request.path == url_for('main_bp.login') else 'false' }}" href="{{ url_for('main_bp.login') }}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>         
             </div>
         </div>
     </nav>
